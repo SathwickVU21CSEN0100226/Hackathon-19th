@@ -1,0 +1,44 @@
+class CropAndSoilManagementSystem:
+    def __init__(self):
+        self.crops = {
+            'Wheat': {'soil': 'Loamy', 'disease': 'Rust'},
+            'Corn': {'soil': 'Sandy', 'disease': 'Blight'},
+            'Rice': {'soil': 'Clay', 'disease': 'Leaf Spot'}
+        }
+    
+    def select_crop(self, soil_type):
+        suitable_crops = [crop for crop, details in self.crops.items() if details['soil'] == soil_type]
+        return suitable_crops
+    
+    def manage_soil(self, soil_type):
+        soil_management_tips = {
+            'Loamy': 'Ensure good drainage and organic matter.',
+            'Sandy': 'Add organic material to improve water retention.',
+            'Clay': 'Avoid overwatering and improve aeration.'
+        }
+        return soil_management_tips.get(soil_type, 'No tips available for this soil type.')
+    
+    def identify_disease(self, crop_name):
+        return self.crops.get(crop_name, {}).get('disease', 'Disease information not available.')
+
+def main():
+    system = CropAndSoilManagementSystem()
+    
+    print("Welcome to the Crop and Soil Management System!")
+    
+    soil_type = input("Enter soil type (Loamy/Sandy/Clay): ")
+    crops = system.select_crop(soil_type)
+    if crops:
+        print(f"Suitable crops for {soil_type} soil: {', '.join(crops)}")
+    else:
+        print(f"No suitable crops found for {soil_type} soil.")
+    
+    tips = system.manage_soil(soil_type)
+    print(f"Soil management tips: {tips}")
+    
+    crop_name = input("Enter crop name to identify disease: ")
+    disease = system.identify_disease(crop_name)
+    print(f"Disease for {crop_name}: {disease}")
+
+if __name__ == "__main__":
+    main()
